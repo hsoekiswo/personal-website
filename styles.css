@@ -1,0 +1,285 @@
+html {
+    font-family: "JetBrains Mono", monospace;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+}
+
+main {
+    height: 80vh;
+    min-height: 80vh;
+    background-color: #c3c3c3;
+    border: solid 1px #c3c3c3;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #008080;
+}
+
+footer {
+    text-align: center;
+    background-color: #c3c3c3;
+    border: solid 1px #c3c3c3;
+}
+
+#bio-photo {
+    height: 128px
+}
+
+.header-image {
+    height: 64px;
+}
+
+.spin {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: spin 5s linear infinite;
+}
+
+.spin img {
+    display: block;
+}
+
+.spin p {
+    color:goldenrod;
+    text-shadow: 1px 1px blue;
+    font-weight: bold;
+    position: absolute;
+    margin: 0; 
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#about {
+    margin-left: 5px;
+}
+
+.menu-header {
+    height: 72px;
+    width: 72px;
+    margin-right: 5px;
+}
+
+.menu-header:active {
+    position: relative;
+    padding: 0px 0px 2px 2px;
+}
+
+
+.directory {
+    height: 128px;
+    width: 128px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 0px;
+    user-select: none;
+}
+
+.directory-image {
+    width: 80%;
+}
+
+.directory span {
+    height: 25%;
+    width: 100%;
+    font-size: 10px;
+    text-align: center;
+}
+
+.directory:active {
+    border: 2px dotted #404040;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:visited {
+    color: blue;
+}
+
+.window {
+    border: 2px solid black;
+    min-height: 300px;
+    width: 40%;
+    min-width: 300px;
+    background-color: #C0C0C0;
+    box-shadow: 4px 4px 0 #404040;
+    display: block;
+}
+
+.title-bar {
+    background-color: royalblue;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700px;
+    padding: 6px 5px;
+    text-shadow: 0.5px 0.5px #FFFFFF;
+}
+
+.menu-bar {
+    background-color: #C0C0C0;
+    border-bottom: 2px solid #808080;
+    padding: 3px 5px;
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.menu-bar button {
+    padding: 2px 6px;
+    background-color: #C0C0C0;
+    border: 1px solid #C0C0C0;
+    border-style: outset;
+    box-shadow: 1.5px 1.5px 0 #FFFFFF inset, 1px 1px 0 black, 1.5px 1.5px 0 #808080;
+}
+
+.menu-bar button:hover {
+    background-color: #848484;
+}
+
+.input-form {
+    display: flex;
+    flex-direction: column;
+    padding: 0px 5px 8px 4px;
+}
+
+.input-text, .input-area {
+    width: 100%;
+}
+
+.input-text {
+    display: flex;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-text label {
+    font-size: 12px;
+}
+
+.form-label1 {
+    flex: 1;
+}
+
+.form-input1 {
+    flex: 2;
+}
+
+.input-area label {
+    font-size: 12px;
+}
+
+.form-input1 input {
+    width: 60%;
+}
+
+.form-input2 textarea {
+    width: 75%;
+    min-height: 100px;
+}
+
+.input-bottom button, .portfolio-visit, .portfolio-list {
+    font-size: 14px;
+    box-shadow: 1.5px 1.5px 0 #FFFFFF inset, 1px 1px 0 black, 1.5px 1.5px 0 #808080;
+}
+
+.journal-content {
+    display: flex;
+    flex-direction: row;
+    height: 300px;
+}
+
+.portfolio-content {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+}
+
+.journal-sidebar {
+    flex: 1;
+    overflow: hidden;
+}
+
+.portfolio-sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 12px;
+}
+
+.journal-sidebar ul {
+    margin: 3px;
+    padding: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.journal-sidebar li {
+    font-size: 14px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.journal-text, .portfolio-description {
+    flex: 3;
+    background-color: white;
+    overflow: scroll;
+}
+
+.journal-text p, .portfolio-description p {
+    font-size: 14px;
+    margin: 3px;
+    padding: 0px 10px;
+    line-height: 1.5;
+}
+
+.portfolio-list {
+    width: 72px;
+    height: 72px;
+    margin: auto;
+}
+
+.portfolio-list p {
+    text-align: center;
+    font-size: 10px;
+    margin: 0px;
+}
+
+.portfolio-icon {
+    width: 80%;
+}
+
+/* Hardcoded to show interactivity */
+
+#oklama {
+    background-color: aqua;
+    border: 1px solid aqua;
+    opacity: 50%;
+}
+
+#address-book {
+    background-color: aqua;
+    opacity: 70%;
+}
