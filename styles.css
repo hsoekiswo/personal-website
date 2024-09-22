@@ -85,6 +85,7 @@ footer {
     align-items: center;
     line-height: 0px;
     user-select: none;
+    cursor: pointer;
 }
 
 .directory-image {
@@ -112,21 +113,43 @@ a:visited {
 
 .window {
     border: 2px solid black;
-    min-height: 300px;
-    width: 40%;
-    min-width: 300px;
+    height: 35em;
+    width: 40em;
     background-color: #C0C0C0;
     box-shadow: 4px 4px 0 #404040;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: start;
+}
+
+.modal {
+    z-index: 2;
 }
 
 .title-bar {
+    display: flex;
     background-color: royalblue;
     color: #FFFFFF;
-    font-size: 14px;
     font-weight: 700px;
     padding: 6px 5px;
     text-shadow: 0.5px 0.5px #FFFFFF;
+}
+
+.title-text {
+    flex: 19;
+    font-size: 16px;
+}
+
+.btn-window {
+    flex: 1;
+    background-color: red;
+    color: white;
+    cursor: pointer;
 }
 
 .menu-bar {
@@ -148,6 +171,17 @@ a:visited {
 
 .menu-bar button:hover {
     background-color: #848484;
+}
+
+.content {
+    height: 100%;
+    padding: 0 0.5em;
+    background-color: #FFFFFF;
+    overflow: auto;
+}
+
+.hidden {
+    display: none;
 }
 
 .input-form {
@@ -199,60 +233,20 @@ a:visited {
     box-shadow: 1.5px 1.5px 0 #FFFFFF inset, 1px 1px 0 black, 1.5px 1.5px 0 #808080;
 }
 
-.journal-content {
-    display: flex;
-    flex-direction: row;
-    height: 300px;
-}
-
-.portfolio-content {
+.horizontal {
     display: flex;
     flex-direction: column;
-    height: 300px;
 }
 
-.journal-sidebar {
-    flex: 1;
-    overflow: hidden;
-}
-
-.portfolio-sidebar {
+.horizontal .sidebar {
     flex: 1;
     display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: space-around;
-    width: 100%;
-    font-size: 12px;
-}
-
-.journal-sidebar ul {
-    margin: 3px;
-    padding: 2px;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
-.journal-sidebar li {
-    font-size: 14px;
-    margin-bottom: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-}
-
-.journal-text, .portfolio-description {
+.horizontal .main-content {
     flex: 3;
-    background-color: white;
     overflow: scroll;
-}
-
-.journal-text p, .portfolio-description p {
-    font-size: 14px;
-    margin: 3px;
-    padding: 0px 10px;
-    line-height: 1.5;
 }
 
 .portfolio-list {
@@ -264,12 +258,82 @@ a:visited {
 .portfolio-list p {
     text-align: center;
     font-size: 10px;
-    margin: 0px;
+    margin: 0;
 }
 
 .portfolio-icon {
-    width: 80%;
+    width: 70%;
+    padding: 0;
+    margin: 0;
 }
+
+.vertical {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical .sidebar {
+    flex: 1;
+    min-height: 100%;
+    overflow: scroll;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-right: 1px solid #C0C0C0;
+    padding-top: 0.5em;
+}
+
+.vertical li {
+    font-size: 14px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.vertical .main-content {
+    flex: 5;
+    overflow: scroll;
+    padding-left: 0.5em;
+}
+
+.sidebar ul {
+    margin: 3px;
+    padding: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.sidebar li {
+    font-size: 14px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+/* .portfolio-sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 12px;
+} */
+
+/* .journal-text, .portfolio-description {
+    flex: 3;
+    background-color: white;
+    overflow: scroll;
+}
+
+.journal-text p, .portfolio-description p {
+    font-size: 14px;
+    margin: 3px;
+    padding: 0px 10px;
+    line-height: 1.5;
+} */
 
 /* Hardcoded to show interactivity */
 

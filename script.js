@@ -12,7 +12,7 @@ Array.from(draggables).forEach(draggable => {
     // `mousedown` event to start dragging
     draggable.addEventListener('mousedown', function (e) {
         // Only start drag if the clicked element is not an anchor tag
-        if (e.target.tagName !== 'A') {
+        if (e.target.tagName !== 'DIV') {
             e.preventDefault(); // Prevent text selection or other defaults
 
             isDragging = true; // Set the dragging flag to true
@@ -67,6 +67,7 @@ Array.from(draggables).forEach(draggable => {
 
         if (hasMoved && (currentX !== originalX || currentY !== originalY)) {
             e.preventDefault(); // Prevent link click if the div has been dragged
+            e.stopImmediatePropagation();
         }
     });
 
@@ -126,30 +127,32 @@ listItems.forEach((item) => {
 
 //----------------------//
 
-// Modal opening | We're not using it right now
-// function openModal(contentId) {
-//     const modal = document.getElementById('modal');
-//     const modalBody = document.getElementById('modal-body');
+// Window pop up or modal opening
+const directories = document.getElementsByClassName("directory");
 
-//     const contentMap = {
-//         'about': './about.html'
-//     }
+Array.from(directories).forEach(item => {
+    item.addEventListener('mousedown', function (e) {
+        const modalTarget = item.getAttribute('data-modal-target');
+        const modal = document.querySelector(`.modal[data-modal="${modalTarget}"]`);
 
-//     // Load the content dinamically based on the clicked item
-//     fetch(contentMap[contentId])
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error('Network response was not ok');
-//             }
-//             return response.text();
-//         })
-//         .then(html => {
-//             modalBody.innerHTML = html;
-//             modal.style.display = 'block';
-//         })
-//         .catch(error => {
-//             console.error('Error fetching content:', error);
-//             modalBody.innerHTML = '<p>Content not found.</p>';
-//             modal.style.display = 'block';
-//         })
-// }
+        const openModal = function () {
+            modal.classList.remove("hidden");
+        }
+
+        item.addEventListener("click", openModal);
+    })
+});
+
+const closeButtons = document.getElementsByClassName("btn-close");
+
+Array.from(closeButtons).forEach(item => {
+    item.addEventListener('mousedown', function (e) {
+        const modal = e.target.closest('.modal')
+
+        const closeModal = function () {
+            modal.classList.add("hidden");
+        }
+
+        item.addEventListener("click", closeModal)
+    })
+})

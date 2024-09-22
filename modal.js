@@ -1,25 +1,19 @@
-function openModal(contentId) {
-    const modal = document.getElementById('modal');
-    const modalBody = document.getElementById('modal-body');
-    
-    // Load the content dynamically based on the clicked item
-    switch(contentId) {
-        case 'my-special-day':
-            modalBody.innerHTML = '<h2>My Special Day</h2><p>Details about my special day...</p>';
-            break;
-        case 'birthday':
-            modalBody.innerHTML = '<h2>Birthday</h2><p>Details about the birthday...</p>';
-            break;
-        case 'long-text':
-            modalBody.innerHTML = '<h2>Long Text</h2><p>Looooooooooooooong text content...</p>';
-            break;
-        default:
-            modalBody.innerHTML = '<p>Content not found.</p>';
-    }
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
+const openModalBtn = document.querySelector(".btn-open");
+const closeModalBtn = document.querySelector(".btn-close");
 
-    modal.style.display = 'block'; // Show the modal
+const openModal = function () {
+    modal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
 }
 
-function closeModal() {
-    document.getElementById('modal').style.display = 'none'; // Hide the modal
+openModalBtn.addEventListener("click", openModal);
+
+const closeModal = function () {
+    modal.classList.add("hidden");
+    overlay.classList.add("hidden");
 }
+
+closeModalBtn.addEventListener("click", closeModal);
+overlay.addEventListener("click", closeModal);
