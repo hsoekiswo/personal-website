@@ -68,6 +68,7 @@ footer {
     height: 72px;
     width: 72px;
     margin-right: 5px;
+    cursor: pointer;
 }
 
 .menu-header:active {

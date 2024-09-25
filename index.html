@@ -12,17 +12,102 @@
 </head>
 <body>
     <header>
-        <a href="about/index.html" title="about me">
-        <div id="about" class="menu-header spin">
+        <section class="window modal hidden" data-modal="about">
+            <div class="title-bar">
+                <div class="title-text">About</div>
+                <button class="btn-window btn-close">X</button>
+            </div>
+            <nav class="menu-bar">
+                <span><button>-</button><button>Aa</button><button>+</button></span>
+                <span><button>darkmode</button></span>
+            </nav>
+            <div class="content">
+                <h1>about me</h1>
+                <img src="../images/ijun.png" alt="" id="bio-photo">
+                <p>
+                    i'm hafizhun soekiswo (ijun)<br>
+                    currently living at the <a href="https://www.google.com/maps/place/Baturiti,+Tabanan+Regency,+Bali/@-8.4104919,114.9799878,10.42z/data=!4m6!3m5!1s0x2dd2275b022b5795:0xdd050556c21acf1f!8m2!3d-8.3366709!4d115.1859517!16s%2Fg%2F12156plq?entry=ttu&g_ep=EgoyMDI0MDgyOC4wIKXMDSoASAFQAw%3D%3D">center of bali</a>
+                </p>
+                <p>
+                    i'm on a career break<br>
+                    most of the time as a father<br>
+                    aspired to be a web developer<br>
+                    former <a href="https://efishery.com/en/">data analyst</a> and <a href="https://magalarva.com/">researcher</a><br>
+                    love spending free time to cook and gardening
+                </p>
+            </div>
+        </section>
+        <div class="menu-header spin btn-open" id="about" data-modal-target="about">
             <img class="header-image" src="./images/about.png" alt="about">
             <p>about</p>
         </div>
-        </a>
-        <a href="contact/index.html" title="contact">
+        <section class="window modal hidden" data-modal="contact">
+            <div class="title-bar">
+                <div class="title-text">Contacting Ijun</div>
+                <button class="btn-window btn-close">X</button>
+            </div>
+            <nav class="menu-bar">
+                <span><button>email</button></span>
+                <span><button>book a call</button></span>
+                <span><button>-</button><button>Aa</button><button>+</button></span>
+                <span><button>darkmode</button></span>
+            </nav>
+            <div class="content">
+                <form class="input-form" action="" method="post">
+                    <div class="input-text">
+                        <div class="form-label1">
+                            <label for="fname">first name</label>
+                        </div>
+                        <div class="form-input1">
+                            <input type="text" name="fname" id="fname">
+                        </div>
+                    </div>
+                    <div class="input-text">
+                        <div class="form-label1">
+                            <label for="lname">last name</label>
+                        </div>
+                        <div class="form-input1">
+                            <input type="text" name="lname" id="lname">
+                        </div>
+                    </div>
+                    <div class="input-text">
+                        <div class="form-label1">
+                            <label for="email">email</label>
+                        </div>
+                        <div class="form-input1">
+                            <input type="text" name="email" id="email">
+                        </div>
+                    </div>
+                    <div class="input-text">
+                        <div class="form-label1">
+                            <label for="subject">subject</label>
+                        </div>
+                        <div class="form-input1">
+                            <input type="text" name="subject" id="subject">
+                        </div>
+                    </div>
+                    <div class="input-area">
+                        <div class="form-label2">
+                            <label for="message">message</label>
+                        </div>
+                        <div class="form-input2">
+                            <textarea name="message" id="message"></textarea>
+                        </div>
+                    </div>
+                    <div class="input-bottom">
+                        <button>send</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <div class="menu-header btn-open" id="contact" data-modal-target="contact">
+            <img class="header-image" src="./images/contact.png" alt="contact">
+        </div>
+        <!-- <a href="contact/index.html" title="contact">
             <div id="contact" class="menu-header">
                 <img class="header-image" src="./images/contact.png" alt="contact"></a>
             </div>
-        </a>
+        </a> -->
     </header>
     <main>
         <div class="spin"></div>

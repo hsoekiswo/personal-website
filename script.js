@@ -156,3 +156,18 @@ Array.from(closeButtons).forEach(item => {
         item.addEventListener("click", closeModal)
     })
 })
+
+const menuHeaders = document.getElementsByClassName("menu-header");
+
+Array.from(menuHeaders).forEach(item => {
+    item.addEventListener('mousedown', function (e) {
+        const modalTarget = item.getAttribute('data-modal-target');
+        const modal = document.querySelector(`.modal[data-modal="${modalTarget}"]`);
+
+        const openModal = function () {
+            modal.classList.remove("hidden");
+        }
+
+        item.addEventListener("click", openModal);
+    })
+})
