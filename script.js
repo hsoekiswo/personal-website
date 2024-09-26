@@ -42,8 +42,8 @@ Array.from(draggables).forEach(draggable => {
             // Record initial mouse and element positions
             startX = draggable.offsetLeft;
             startY = draggable.offsetTop;
-            initialMouseX = e.clientX;
-            initialMouseY = e.clientY;
+            initialMouseX = touch.clientX;
+            initialMouseY = touch.clientY;
 
             // Add event listeners for `touchmove` and `touchend` events
             document.addEventListener('touchmove', handleTouchMove);
