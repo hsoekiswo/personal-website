@@ -2,11 +2,13 @@ const draggables = document.getElementsByClassName("directory");
 
 Array.from(draggables).forEach(draggable => {
     let isDragging = false;
+    let hasDragged = false; // New flag to track dragging
     let startX, startY, initialX, initialY;
 
     // Function to start dragging
     function startDrag(x, y) {
         isDragging = true;
+        hasDragged = false; // Reset drag flag
         startX = draggable.offsetLeft;
         startY = draggable.offsetTop;
         initialX = x;
@@ -19,6 +21,11 @@ Array.from(draggables).forEach(draggable => {
 
         const dx = x - initialX;
         const dy = y - initialY;
+
+        // If movement is significant, set hasDragged to true
+        if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+            hasDragged = true;
+        }
 
         draggable.style.left = `${startX + dx}px`;
         draggable.style.top = `${startY + dy}px`;
@@ -46,10 +53,15 @@ Array.from(draggables).forEach(draggable => {
     }
 
     // Mouse up handler
-    function handleMouseUp() {
+    function handleMouseUp(e) {
         stopDrag();
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('mouseup', handleMouseUp);
+
+        if (!hasDragged) {
+            // Open modal only if there was no dragging
+            openModal();
+        }
     }
 
     // Touch events
@@ -74,6 +86,17 @@ Array.from(draggables).forEach(draggable => {
         stopDrag();
         document.removeEventListener('touchmove', handleTouchMove);
         document.removeEventListener('touchend', handleTouchEnd);
+
+        if (!hasDragged) {
+            // Open modal only if there was no dragging
+            openModal();
+        }
+    }
+
+    // Example modal opening function
+    function openModal() {
+        console.log("Modal opened");
+        // Add your modal opening logic here
     }
 });
 
