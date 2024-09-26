@@ -30,8 +30,47 @@ Array.from(draggables).forEach(draggable => {
         }
     });
 
+    // applied for mobile
+    draggable.addEventListener('touchstart', function (e) {
+        // Only start drag if the clicked element is not an anchor tag
+        if (e.target.tagName !== 'DIV') {
+            e.preventDefault(); // Prevent text selection or other defaults
+
+            isDragging = true; // Set the dragging flag to true
+            hasMoved = false; // Reset the moved flag
+
+            // Record initial mouse and element positions
+            startX = draggable.offsetLeft;
+            startY = draggable.offsetTop;
+            initialMouseX = e.clientX;
+            initialMouseY = e.clientY;
+
+            // Add event listeners for `touchmove` and `touchend` events
+            document.addEventListener('touchmove', handleTouchMove);
+            document.addEventListener('touchend', handleTouchEnd);
+        }
+    });
+
     // `mousemove` event to handle dragging
     function handleMouseMove(e) {
+        if (!isDragging) return;
+
+        // Calculate new positions based on the mouse movement
+        const dx = e.clientX - initialMouseX;
+        const dy = e.clientY - initialMouseY;
+
+        // Move the draggable element
+        draggable.style.left = `${startX + dx}px`;
+        draggable.style.top = `${startY + dy}px`;
+
+        // Check if the div has moved from its original position
+        if (Math.abs(dx) > 0 || Math.abs(dy) > 0) {
+            hasMoved = true; // Set the moved flag to true if it has moved
+        }
+    }
+
+    // `touchmove` event handle dragging
+    function handleTouchMove(e) {
         if (!isDragging) return;
 
         // Calculate new positions based on the mouse movement
@@ -54,6 +93,17 @@ Array.from(draggables).forEach(draggable => {
             // Remove event listeners when drag ends
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
+
+            isDragging = false; // Reset the dragging flag
+        }
+    }
+
+    // `touchend` event to stop dragging
+    function handleTouchEnd(e) {
+        if (isDragging) {
+            // Remove event listeners when drag ends
+            document.removeEventListener('touchmove', handleMouseMove);
+            document.removeEventListener('touchend', handleMouseUp);
 
             isDragging = false; // Reset the dragging flag
         }
