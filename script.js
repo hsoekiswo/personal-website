@@ -213,3 +213,35 @@ Array.from(menuHeaders).forEach(item => {
         item.addEventListener("click", openModal);
     })
 })
+
+// Darkmode
+const darkModeToggle = document.getElementsByClassName('dark-mode');
+
+Array.from(darkModeToggle).forEach(item => {
+    item.addEventListener('click', function () {
+        const modal = this.closest('.modal')
+        const mainContent = modal.querySelector('.main-content')
+
+        mainContent.classList.toggle('dark-content');
+
+        if (mainContent.classList.contains('dark-content')) {
+            localStorage.setItem('darkMode', 'enabled');
+        } else {
+            localStorage.setItem('darkMode', 'disabled')
+        }
+    })
+})
+
+window.addEventListener('load', function () {
+    const darkModeState = localStorage.getItem('darkMode');
+    Array.from(darkModeToggle).forEach(item => {
+        const modal = item.closest('.modal');
+        const mainContent = modal.querySelector('.main-content');
+
+        if (darkModeState === 'enabled') {
+            mainContent.classList.add('dark-content');
+        } else {
+            mainContent.classList.remove('dark-content');
+        }
+    })
+})
