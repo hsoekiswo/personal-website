@@ -66,7 +66,7 @@ Array.from(draggables).forEach(draggable => {
 
     // Touch events
     draggable.addEventListener('touchstart', function (e) {
-        // e.preventDefault(); // Prevent touch scroll
+        e.preventDefault(); // Prevent touch scroll
         const touch = e.touches[0];
         startDrag(touch.clientX, touch.clientY);
 
