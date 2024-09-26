@@ -2,127 +2,79 @@ const draggables = document.getElementsByClassName("directory");
 
 Array.from(draggables).forEach(draggable => {
     let isDragging = false;
-    let hasMoved = false; // Track whether the div has been moved
-    let startX, startY, initialMouseX, initialMouseY;
+    let startX, startY, initialX, initialY;
 
-    // Store the original position of the div
-    const originalX = draggable.offsetLeft;
-    const originalY = draggable.offsetTop;
+    // Function to start dragging
+    function startDrag(x, y) {
+        isDragging = true;
+        startX = draggable.offsetLeft;
+        startY = draggable.offsetTop;
+        initialX = x;
+        initialY = y;
+    }
 
-    // `mousedown` event to start dragging
+    // Function to move the draggable
+    function moveDrag(x, y) {
+        if (!isDragging) return;
+
+        const dx = x - initialX;
+        const dy = y - initialY;
+
+        draggable.style.left = `${startX + dx}px`;
+        draggable.style.top = `${startY + dy}px`;
+    }
+
+    // Function to stop dragging
+    function stopDrag() {
+        if (isDragging) {
+            isDragging = false;
+        }
+    }
+
+    // Mouse events
     draggable.addEventListener('mousedown', function (e) {
-        // Only start drag if the clicked element is not an anchor tag
-        if (e.target.tagName !== 'DIV') {
-            e.preventDefault(); // Prevent text selection or other defaults
+        e.preventDefault(); // Prevent selection or other defaults
+        startDrag(e.clientX, e.clientY);
 
-            isDragging = true; // Set the dragging flag to true
-            hasMoved = false; // Reset the moved flag
-
-            // Record initial mouse and element positions
-            startX = draggable.offsetLeft;
-            startY = draggable.offsetTop;
-            initialMouseX = e.clientX;
-            initialMouseY = e.clientY;
-
-            // Add event listeners for `mousemove` and `mouseup` events
-            document.addEventListener('mousemove', handleMouseMove);
-            document.addEventListener('mouseup', handleMouseUp);
-        }
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
     });
 
-    // applied for mobile
-    draggable.addEventListener('touchstart', function (e) {
-        // Only start drag if the clicked element is not an anchor tag
-        if (e.target.tagName !== 'DIV') {
-            e.preventDefault(); // Prevent text selection or other defaults
-
-            isDragging = true; // Set the dragging flag to true
-            hasMoved = false; // Reset the moved flag
-
-            const touch = e.touches[0];
-
-            // Record initial mouse and element positions
-            startX = draggable.offsetLeft;
-            startY = draggable.offsetTop;
-            initialMouseX = touch.clientX;
-            initialMouseY = touch.clientY;
-
-            // Add event listeners for `touchmove` and `touchend` events
-            document.addEventListener('touchmove', handleTouchMove);
-            document.addEventListener('touchend', handleTouchEnd);
-        }
-    });
-
-    // `mousemove` event to handle dragging
+    // Mouse move handler
     function handleMouseMove(e) {
-        if (!isDragging) return;
-
-        // Calculate new positions based on the mouse movement
-        const dx = e.clientX - initialMouseX;
-        const dy = e.clientY - initialMouseY;
-
-        // Move the draggable element
-        draggable.style.left = `${startX + dx}px`;
-        draggable.style.top = `${startY + dy}px`;
-
-        // Check if the div has moved from its original position
-        if (Math.abs(dx) > 0 || Math.abs(dy) > 0) {
-            hasMoved = true; // Set the moved flag to true if it has moved
-        }
+        moveDrag(e.clientX, e.clientY);
     }
 
-    // `touchmove` event handle dragging
-    function handleTouchMove(e) {
-        if (!isDragging) return;
-
-        // Calculate new positions based on the mouse movement
-        const dx = e.clientX - initialMouseX;
-        const dy = e.clientY - initialMouseY;
-
-        // Move the draggable element
-        draggable.style.left = `${startX + dx}px`;
-        draggable.style.top = `${startY + dy}px`;
-
-        // Check if the div has moved from its original position
-        if (Math.abs(dx) > 0 || Math.abs(dy) > 0) {
-            hasMoved = true; // Set the moved flag to true if it has moved
-        }
+    // Mouse up handler
+    function handleMouseUp() {
+        stopDrag();
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
     }
 
-    // `mouseup` event to stop dragging
-    function handleMouseUp(e) {
-        if (isDragging) {
-            // Remove event listeners when drag ends
-            document.removeEventListener('mousemove', handleMouseMove);
-            document.removeEventListener('mouseup', handleMouseUp);
+    // Touch events
+    draggable.addEventListener('touchstart', function (e) {
+        e.preventDefault(); // Prevent touch scroll
+        const touch = e.touches[0];
+        startDrag(touch.clientX, touch.clientY);
 
-            isDragging = false; // Reset the dragging flag
-        }
-    }
-
-    // `touchend` event to stop dragging
-    function handleTouchEnd(e) {
-        if (isDragging) {
-            // Remove event listeners when drag ends
-            document.removeEventListener('touchmove', handleTouchMove);
-            document.removeEventListener('touchend', handleTouchEnd);
-
-            isDragging = false; // Reset the dragging flag
-        }
-    }
-
-    // Handle click event on the draggable element
-    draggable.addEventListener('click', function (e) {
-        // Check if the element has moved from its original position
-        const currentX = draggable.offsetLeft;
-        const currentY = draggable.offsetTop;
-
-        if (hasMoved && (currentX !== originalX || currentY !== originalY)) {
-            e.preventDefault(); // Prevent link click if the div has been dragged
-            e.stopImmediatePropagation();
-        }
+        document.addEventListener('touchmove', handleTouchMove);
+        document.addEventListener('touchend', handleTouchEnd);
     });
 
+    // Touch move handler
+    function handleTouchMove(e) {
+        e.preventDefault(); // Prevent scrolling while dragging
+        const touch = e.touches[0];
+        moveDrag(touch.clientX, touch.clientY);
+    }
+
+    // Touch end handler
+    function handleTouchEnd() {
+        stopDrag();
+        document.removeEventListener('touchmove', handleTouchMove);
+        document.removeEventListener('touchend', handleTouchEnd);
+    }
 });
 
 //----------------------//
