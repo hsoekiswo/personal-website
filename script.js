@@ -66,9 +66,6 @@ Array.from(draggables).forEach(draggable => {
 
     // Touch events
     draggable.addEventListener('touchstart', function (e) {
-        if (hasDragged || (currentX !== startX || currentY !== startY)) {
-            e.preventDefault(); // Prevent touch scroll
-        }
         const touch = e.touches[0];
         startDrag(touch.clientX, touch.clientY);
 
@@ -78,13 +75,17 @@ Array.from(draggables).forEach(draggable => {
 
     // Touch move handler
     function handleTouchMove(e) {
-        // e.preventDefault(); // Prevent scrolling while dragging
         const touch = e.touches[0];
-        moveDrag(touch.clientX, touch.clientY);
+
+        // Check if the user has started dragging
+        if (isDragging) {
+            moveDrag(touch.clientX, touch.clientY);
+            e.preventDefault(); // Prevent scrolling only during dragging
+        }
     }
 
     // Touch end handler
-    function handleTouchEnd() {
+    function handleTouchEnd(e) {
         stopDrag();
         document.removeEventListener('touchmove', handleTouchMove);
         document.removeEventListener('touchend', handleTouchEnd);
