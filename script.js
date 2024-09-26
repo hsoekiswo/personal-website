@@ -39,6 +39,8 @@ Array.from(draggables).forEach(draggable => {
             isDragging = true; // Set the dragging flag to true
             hasMoved = false; // Reset the moved flag
 
+            const touch = e.touches[0];
+
             // Record initial mouse and element positions
             startX = draggable.offsetLeft;
             startY = draggable.offsetTop;
@@ -102,8 +104,8 @@ Array.from(draggables).forEach(draggable => {
     function handleTouchEnd(e) {
         if (isDragging) {
             // Remove event listeners when drag ends
-            document.removeEventListener('touchmove', handleMouseMove);
-            document.removeEventListener('touchend', handleMouseUp);
+            document.removeEventListener('touchmove', handleTouchMove);
+            document.removeEventListener('touchend', handleTouchEnd);
 
             isDragging = false; // Reset the dragging flag
         }
