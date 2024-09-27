@@ -135,6 +135,8 @@ a:visited {
     html {
         height: 95vh;
         max-height: 95vh;
+        overflow: hidden;
+        margin: 0;
     }
 
     .window {
