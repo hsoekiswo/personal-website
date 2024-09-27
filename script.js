@@ -57,15 +57,11 @@ Array.from(draggables).forEach(draggable => {
         stopDrag();
         document.removeEventListener('mousemove', handleMouseMove);
         document.removeEventListener('mouseup', handleMouseUp);
-
-        if (!hasDragged) {
-            // Open modal only if there was no dragging
-            openModal();
-        }
     }
 
     // Touch events
     draggable.addEventListener('touchstart', function (e) {
+        e.preventDefault(); // Prevent selection or other defaults
         const touch = e.touches[0];
         startDrag(touch.clientX, touch.clientY);
 
@@ -89,11 +85,6 @@ Array.from(draggables).forEach(draggable => {
         stopDrag();
         document.removeEventListener('touchmove', handleTouchMove);
         document.removeEventListener('touchend', handleTouchEnd);
-
-        if (!hasDragged) {
-            // Open modal only if there was no dragging
-            openModal();
-        }
     }
 
     // Handle click event on the draggable element
@@ -107,12 +98,6 @@ Array.from(draggables).forEach(draggable => {
             e.stopImmediatePropagation(); // Stop the event from propagating further
         }
     });
-
-    // Example modal opening function
-    function openModal() {
-        console.log("Modal opened");
-        // Add your modal opening logic here
-    }
 });
 
 //----------------------//
