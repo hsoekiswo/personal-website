@@ -61,7 +61,7 @@ Array.from(draggables).forEach(draggable => {
 
     // Touch events
     draggable.addEventListener('touchstart', function (e) {
-        e.preventDefault(); // Prevent selection or other defaults
+        e.stopImmediatePropagation();
         const touch = e.touches[0];
         startDrag(touch.clientX, touch.clientY);
 
