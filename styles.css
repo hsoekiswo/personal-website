@@ -157,8 +157,8 @@ a:visited {
     }
 
     main {
-        height: 80%;
-        min-height: 80%;
+        height: 70vh;
+        min-height: 70vh;
     }
 }
 
