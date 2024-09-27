@@ -133,16 +133,16 @@ a:visited {
 
 @media screen and (max-width: 50em) {
     html {
-        height: 95vh;
-        max-height: 95vh;
+        height: 90vh;
+        max-height: 90vh;
         overflow: hidden;
         margin: 0;
     }
 
     .window {
         border: 2px solid black;
-        height: 95vh;
-        max-height: 95vh;
+        height: 75vh;
+        max-height: 75vh;
         width: 95vw;
         min-width: 95vw;
         background-color: #C0C0C0;
