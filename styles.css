@@ -155,6 +155,11 @@ a:visited {
         left: 50%;
         transform: translate(-50%, -50%);
     }
+
+    main {
+        height: 80%;
+        min-height: 80%;
+    }
 }
 
 .modal {
