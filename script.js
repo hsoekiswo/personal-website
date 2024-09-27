@@ -245,3 +245,55 @@ window.addEventListener('load', function () {
         }
     })
 })
+
+// Adjusting font size
+localStorage.setItem('fontSize', 'medium');
+const smallerFontToggle = document.getElementsByClassName('smaller-font');
+const largerFontToggle = document.getElementsByClassName('larger-font');
+
+function applyFontSize(mainContent, size) {
+    mainContent.classList.remove('small-font', 'medium-font', 'large-font');
+    if (size === 'small') {
+        mainContent.classList.add('small-font');
+    } else if (size === 'medium') {
+        mainContent.classList.add('medium-font');
+    } else if (size === 'large') {
+        mainContent.classList.add('large-font');
+    }
+}
+
+Array.from(smallerFontToggle).forEach(item => {
+    item.addEventListener('click', function () {
+        const fontSizeState = localStorage.getItem('fontSize');
+        const modal = this.closest('.modal');
+        const mainContent = modal.querySelector('.main-content');
+
+        if (fontSizeState === 'medium') {
+            localStorage.setItem('fontSize', 'small');
+            applyFontSize(mainContent, 'small');
+            console.log('medium to small');
+        } else if (fontSizeState === 'large') {
+            localStorage.setItem('fontSize', 'medium');
+            applyFontSize(mainContent, 'medium');
+            console.log('large to medium');
+        }
+    })
+})
+
+Array.from(largerFontToggle).forEach(item => {
+    item.addEventListener('click', function () {
+        const fontSizeState = localStorage.getItem('fontSize');
+        const modal = this.closest('.modal');
+        const mainContent = modal.querySelector('.main-content');
+
+        if (fontSizeState === 'small') {
+            localStorage.setItem('fontSize', 'medium');
+            applyFontSize(mainContent, 'medium');
+            console.log('small to medium');
+        } else if (fontSizeState === 'medium') {
+            localStorage.setItem('fontSize', 'large');
+            applyFontSize(mainContent, 'large');
+            console.log('medium to large');
+        }
+    })
+})
