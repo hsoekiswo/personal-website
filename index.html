@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>hafizhun soekiswo</title>
     <link rel="icon" href="./images/computer.png" type="image/png" class="icon">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
@@ -29,20 +29,8 @@
                     <button class="dark-mode">darkmode</button>
                 </span>
             </nav>
-            <div class="content main-content">
-                <h1>about me</h1>
-                <img src="../images/ijun.png" alt="" id="bio-photo">
-                <p>
-                    i'm hafizhun soekiswo (ijun)<br>
-                    currently living at the <a href="https://www.google.com/maps/place/Baturiti,+Tabanan+Regency,+Bali/@-8.4104919,114.9799878,10.42z/data=!4m6!3m5!1s0x2dd2275b022b5795:0xdd050556c21acf1f!8m2!3d-8.3366709!4d115.1859517!16s%2Fg%2F12156plq?entry=ttu&g_ep=EgoyMDI0MDgyOC4wIKXMDSoASAFQAw%3D%3D">center of bali</a>
-                </p>
-                <p>
-                    i'm on a career break<br>
-                    most of the time as a father<br>
-                    aspired to be a web developer<br>
-                    former <a href="https://efishery.com/en/">data analyst</a> and <a href="https://magalarva.com/">researcher</a><br>
-                    love spending free time to cook and gardening
-                </p>
+            <div class="content main-content" id="about-modal-content">
+                
             </div>
         </section>
         <div class="menu-header spin btn-open" id="about" data-modal-target="about">
@@ -66,52 +54,8 @@
                     <button class="dark-mode">darkmode</button>
                 </span>
             </nav>
-            <div class="content main-content">
-                <form class="input-form" action="" method="post">
-                    <div class="input-text">
-                        <div class="form-label1">
-                            <label for="fname">first name</label>
-                        </div>
-                        <div class="form-input1">
-                            <input type="text" name="fname" id="fname">
-                        </div>
-                    </div>
-                    <div class="input-text">
-                        <div class="form-label1">
-                            <label for="lname">last name</label>
-                        </div>
-                        <div class="form-input1">
-                            <input type="text" name="lname" id="lname">
-                        </div>
-                    </div>
-                    <div class="input-text">
-                        <div class="form-label1">
-                            <label for="email">email</label>
-                        </div>
-                        <div class="form-input1">
-                            <input type="text" name="email" id="email">
-                        </div>
-                    </div>
-                    <div class="input-text">
-                        <div class="form-label1">
-                            <label for="subject">subject</label>
-                        </div>
-                        <div class="form-input1">
-                            <input type="text" name="subject" id="subject">
-                        </div>
-                    </div>
-                    <div class="input-area">
-                        <div class="form-label2">
-                            <label for="message">message</label>
-                        </div>
-                        <div class="form-input2">
-                            <textarea name="message" id="message"></textarea>
-                        </div>
-                    </div>
-                    <div class="input-bottom">
-                        <button>send</button>
-                    </div>
-                </form>
+            <div class="content main-content" id="contact-modal-content">
+                
             </div>
         </section>
         <div class="menu-header btn-open" id="contact" data-modal-target="contact">
@@ -135,38 +79,8 @@
                     <button class="dark-mode">darkmode</button>
                 </span>
             </nav>
-            <div class="content horizontal">
-                <div class="main-content">
-                    <p>
-                        This is addres book portfolio
-                        <br>
-                        <br>
-                        This project is about lorem ipsum dolor amet.
-                        <br>
-                        <br>
-                        <a href="" target="_blank">
-                            <button class="portfolio-visit">Visit</button>
-                        </a>
-                    </p>
-                </div>
-                <div class="sidebar">
-                    <button class="portfolio-list" id="address-book">
-                        <img src="./images/phonebook.png" alt="" class="portfolio-icon">
-                        <p>address book</p>
-                    </button>
-                    <button class="portfolio-list">
-                        <img src="./images/task.png" alt="" class="portfolio-icon">
-                        <p>task management</p>
-                    </button>
-                    <button class="portfolio-list">
-                        <img src="./images/info-api.webp" alt="" class="portfolio-icon">
-                        <p>information api</p>
-                    </button>
-                    <button  class="portfolio-list">
-                        <img src="./images/ecommerce.png" alt=""  class="portfolio-icon">
-                        <p>simple ecommerce</p>
-                    </button>
-                </div>
+            <div class="content horizontal" id="portfolio-modal-content">
+                
             </div>
         </section>
         <div class="directory btn-open" id="portfolio" data-modal-target="portfolio">
@@ -188,46 +102,8 @@
                     <button class="dark-mode">darkmode</button>
                 </span>
             </nav>
-            <div class="content vertical">
-                <div class="sidebar">
-                    <ul id="sidebar-text">
-                        <li id="oklama">From oklama</li>
-                        <li>Birthday</li>
-                        <li>Looooooooooooooong text</li>
-                    </ul>
-                </div>
-                <div class="main-content">
-                    <h1>
-                        From Oklama
-                    </h1>
-                    <p>
-                        I spend most of my days with fleeting thoughts. Writing. Listening. And collecting old Beach cruisers. The morning rides keep me on a hill of silence.
-                        <br>
-                        <br>
-                        I go months without a phone.
-                        <br>
-                        <br>
-                        Love, loss, and grief have disturbed my comfort zone, but the glimmers of God speak through my music and family.
-                        <br>
-                        <br>
-                        While the world around me evolves, I reflect on what matters the most. The life in which my words will land next.
-                        <br>
-                        <br>
-                        As I produce my final TDE album, I feel joy to have been a part of such a cultural imprint after 17 years. The Struggles. The Success. And most importantly, the Brotherhood. May the Most High continue to use Top Dawg as a vessel for candid creators. As I continue to pursue my life’s calling.
-                        <br>
-                        <br>
-                        There’s beauty in completion. And always faith in the unknown.
-                        <br>
-                        <br>
-                        Thank you for keeping me in your thoughts. I’ve prayed for you all.
-                        <br>
-                        <br>
-                        See you soon enough.
-                        <br>
-                        <br>
-                        -oklama
-                    </p>
-                </div>
+            <div class="content vertical" id="journal-modal-content">
+                
             </div>
         </section>
         <div class="directory btn-open" id="journal" data-modal-target="journal">
@@ -249,40 +125,8 @@
                     <button class="dark-mode">darkmode</button>
                 </span>
             </nav>
-            <div class="content main-content">
-                <div class="main-content">
-                    <p>books i enjoyed</p>
-                    <ul>
-                        <li><a href="https://www.amazon.com/Brief-History-Time-Stephen-Hawking/dp/0553380168" target="_blank" >A Brief History of Time</a></li>
-                        <li><a href="https://www.google.com/aclk?sa=l&ai=DChcSEwjB14OmnqmIAxW3EYMDHSb9AjAYABABGgJzZg&co=1&ase=2&gclid=Cj0KCQjwiuC2BhDSARIsALOVfBIuZhxyvQm3zr9YDknEZj-5vrrgVqFGYdiQUVYKqQJ9A73z-tNb13MaAjIPEALw_wcB&sig=AOD64_2V4-zSnChaqBke1WNXgqPuc8RPEg&q&nis=4&adurl&ved=2ahUKEwidhf-lnqmIAxVbTGwGHcFJGDMQ0Qx6BAggEAE" target="_blank" >Storytelling With Data</a></li>
-                        <li><a href="https://www.amazon.com/Kite-Runner-Khaled-Hosseini/dp/159463193X" target="_blank" >The Kite Runner</a></li>
-                        <li><a href="https://www.amazon.com/Guns-Germs-Steel-Fates-Societies/dp/0393317552" target="_blank" >Gun, Germ, and Steel</a></li>
-                        <li><a href="https://www.amazon.com/Creative-Selection-Inside-Apples-Process/dp/1250194466" target="_blank" >Creative Selection</a></li>
-                        <li><a href="https://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman/dp/0374533555" target="_blank" >Thinking Fast and Slow</a></li>
-                        <li><a href="https://www.amazon.com/Mans-Search-Meaning-Viktor-Frankl-ebook/dp/B009U9S6FI" target="_blank" >Man's Search for Meaning</a></li>
-                        <li><a href="https://www.gramedia.com/products/catatan-seorang-demonstran-soe-hok-gie?srsltid=AfmBOorD8wQ8X7dXlm2x4hj-fIsHf62nGsKY1223d9QR-scZX-KCjYdA" target="_blank" >Soe Hok Gie:</a>Catatan Seorang Demonstran</li>
-                        <li><a href="https://www.amazon.com/Wind-Up-Bird-Chronicle-Novel/dp/0679775439" target="_blank" >The Wind-Up Bird Chronicle</a></li>
-                        <li><a href="https://www.amazon.com/Underground-Vintage-Classics-Fyodor-Dostoevsky/dp/067973452X" target="_blank" >Notes from Underground</a></li>
-                        <li><a href="https://www.amazon.com/Design-Everyday-Things-Revised-Expanded/dp/0465050654" target="_blank" >The Design Of Everyday Things</a></li>
-                        <li><a href="https://www.gramedia.com/products/corat-coret-di-toilet-1" target="_blank" >Corat-Coret di Toilet</a></li>
-                        <li><a href="https://www.amazon.com/Zero-One-Notes-Startups-Future/dp/0804139296" target="_blank" >Zero to One</a></li>
-                        <li><a href="https://www.goodreads.com/book/show/9555.The_Elephant_Vanishes" target="_blank" >The Elephant Vanishes</a></li>
-                        <li><a href="https://www.gramedia.com/products/burung2-rantau-cover-baru?srsltid=AfmBOoq8B0pQfn_ibDnCrW6T6JV5irgLgON8S1vGfZW5ousFblwg0Tqa" target="_blank" >Burung-Burung Rantau</a></li>
-                        <li><a href="https://www.gramedia.com/products/untuk-negeriku-sebuah-otobiografi-muhammad-hatta-edisi-baru?srsltid=AfmBOoqYyYbyBjy7nWXqhFwKY7m2cP4k8jsSHQgJNw7byGsnLNspE-VD" target="_blank" >Otobiografi Mohammad Hatta</a></li>
-                        <li><a href="https://www.amazon.com/High-Output-Management-Andrew-Grove/dp/0679762884" target="_blank" >High Output Management</a></li>
-                        <li><a href="https://www.amazon.com/How-Finance-Works-Thinking-Numbers/dp/1633696707" target="_blank" >How Finance Works</a></li>
-                        <li><a href="https://www.amazon.com/Colorless-Tsukuru-Tazaki-Years-Pilgrimage/dp/0804170126" target="_blank" >Colorless Tsukuru Tazaki and His Years of Pilgrimage</a></li>
-                        <li><a href="https://www.amazon.com/Data-Warehouse-Toolkit-Definitive-Dimensional/dp/1118530802" target="_blank" >The Data Warehouse Toolkit</a></li>
-                        <li><a href="https://www.amazon.com/Working-Backwards-Insights-Stories-Secrets/dp/1250267595" target="_blank" >Working Backwards</a></li>
-                        <li><a href="https://www.amazon.com/Radical-Candor-Kick-Ass-Without-Humanity/dp/1250103509" target="_blank" >Radical Candor</a></li>
-                        <li><a href="https://www.amazon.com/Build-Unorthodox-Guide-Making-Things/dp/0063046067" target="_blank" >Build:</a>An Unorthodox Guide to Making Things Worth Making</li>
-                        <li><a href="https://www.amazon.com/How-Asia-Works-Joe-Studwell/dp/0802121322" target="_blank" >How Asia Works</a></li>
-                        <li><a href="https://www.amazon.com/Outlive-Longevity-Peter-Attia-MD/dp/0593236599" target="_blank" >Outlive:</a>The Science and Art of Longevity</li>
-                        <li><a href="https://www.amazon.com/Tools-Titans-Billionaires-World-Class-Performers/dp/1328683788" target="_blank" >Tools of Titans</a></li>
-                        <li><a href="" target="_blank" >The Minimalist Entrepreneur</a></li>
-                        <!-- <li><a href="" target="_blank" ></a></li> -->
-                    </ul>
-                </div>
+            <div class="content main-content" id="bookshelf-modal-content">
+                
             </div>
         </section>
         <div class="directory btn-open" id="bookshelf" data-modal-target="bookshelf">
@@ -304,15 +148,8 @@
                     <button class="dark-mode">darkmode</button>
                 </span>
             </nav>
-            <div class="content main-content">
-                <div class="main-content">
-                    <p>perhaps this can make your day</p>
-                    <ul>
-                        <li><a href="https://open.spotify.com/album/4N6QrNl4RvEjyaPtUilwRD?si=PtQ5VyRiTnCLA8R303m_Gw" target="_blank" >naima</a></li>
-                        <li><a href="https://open.spotify.com/playlist/37i9dQZF1DZ06evO31L9aU?si=92ff6cb3f50d44e3" target="_blank" >mitsume</a></li>
-                        <li><a href="https://open.spotify.com/playlist/37i9dQZF1DZ06evO0Xz3yx?si=3d7d1959976445ca" target="_blank" >laze</a></li>
-                    </ul>
-                </div>
+            <div class="content main-content" id="music-modal-content">
+                
             </div>
         </section>
         <div class="directory btn-open" id="music" data-modal-target="music">

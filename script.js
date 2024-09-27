@@ -155,21 +155,54 @@ listItems.forEach((item) => {
 //----------------------//
 
 // Window pop up or modal opening
+const menuHeaders = document.getElementsByClassName("menu-header");
 const directories = document.getElementsByClassName("directory");
+
+async function loadContent(modalElement, url, contentSelector) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Data couldn't be loaded \nResponse status: ${response.status}`);
+        }
+        const data = await response.text();
+        document.querySelector(contentSelector).innerHTML = data;
+        modalElement.classList.remove("hidden");
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+Array.from(menuHeaders).forEach(item => {
+    item.addEventListener('mousedown', function (e) {
+        const modalTarget = item.getAttribute('data-modal-target');
+        const modal = document.querySelector(`.modal[data-modal="${modalTarget}"]`);
+
+        if (modalTarget === "about") {
+            loadContent(modal, './about/index.html', '#about-modal-content');
+        } else if (modalTarget=== "contact") {
+            loadContent(modal, './contact/index.html', '#contact-modal-content');
+        }
+    })
+})
 
 Array.from(directories).forEach(item => {
     item.addEventListener('mousedown', function (e) {
         const modalTarget = item.getAttribute('data-modal-target');
         const modal = document.querySelector(`.modal[data-modal="${modalTarget}"]`);
 
-        const openModal = function () {
-            modal.classList.remove("hidden");
+        if (modalTarget === "portfolio") {
+            loadContent(modal, './portfolio/index.html', '#portfolio-modal-content');
+        } else if (modalTarget=== "journal") {
+            loadContent(modal, './journal/index.html', '#journal-modal-content');
+        } else if (modalTarget=== "bookshelf") {
+            loadContent(modal, './bookshelf/index.html', '#bookshelf-modal-content');
+        } else if (modalTarget=== "music") {
+            loadContent(modal, './music/index.html', '#music-modal-content');
         }
-
-        item.addEventListener("click", openModal);
     })
 });
 
+// Window closing
 const closeButtons = document.getElementsByClassName("btn-close");
 
 Array.from(closeButtons).forEach(item => {
@@ -184,20 +217,7 @@ Array.from(closeButtons).forEach(item => {
     })
 })
 
-const menuHeaders = document.getElementsByClassName("menu-header");
-
-Array.from(menuHeaders).forEach(item => {
-    item.addEventListener('mousedown', function (e) {
-        const modalTarget = item.getAttribute('data-modal-target');
-        const modal = document.querySelector(`.modal[data-modal="${modalTarget}"]`);
-
-        const openModal = function () {
-            modal.classList.remove("hidden");
-        }
-
-        item.addEventListener("click", openModal);
-    })
-})
+//----------------------//
 
 // Darkmode
 const darkModeToggle = document.getElementsByClassName('dark-mode');
