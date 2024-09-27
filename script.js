@@ -65,7 +65,7 @@ Array.from(draggables).forEach(draggable => {
         const touch = e.touches[0];
         startDrag(touch.clientX, touch.clientY);
 
-        document.addEventListener('touchmove', handleTouchMove);
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
         document.addEventListener('touchend', handleTouchEnd);
     });
 
