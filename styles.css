@@ -372,6 +372,18 @@ a:visited {
     opacity: 50%;
 }
 
+.jetbrains {
+    font-family: "JetBrains Mono", monospace;
+}
+
+.ibm-plex {
+    font-family: "IBM Plex Serif", serif;
+}
+
+.courier-prime {
+    font-family: "Courier Prime", monospace;
+}
+
 #address-book {
     background-color: aqua;
     opacity: 70%;

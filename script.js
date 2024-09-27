@@ -271,11 +271,9 @@ Array.from(smallerFontToggle).forEach(item => {
         if (fontSizeState === 'medium') {
             localStorage.setItem('fontSize', 'small');
             applyFontSize(mainContent, 'small');
-            console.log('medium to small');
         } else if (fontSizeState === 'large') {
             localStorage.setItem('fontSize', 'medium');
             applyFontSize(mainContent, 'medium');
-            console.log('large to medium');
         }
     })
 })
@@ -289,11 +287,43 @@ Array.from(largerFontToggle).forEach(item => {
         if (fontSizeState === 'small') {
             localStorage.setItem('fontSize', 'medium');
             applyFontSize(mainContent, 'medium');
-            console.log('small to medium');
         } else if (fontSizeState === 'medium') {
             localStorage.setItem('fontSize', 'large');
             applyFontSize(mainContent, 'large');
-            console.log('medium to large');
+        }
+    })
+})
+
+// Change font style
+localStorage.setItem('fontStyle', 'jetbrains');
+const changeFontToggle = document.getElementsByClassName('font-style');
+
+function applyFontStyle(mainContent, style) {
+    mainContent.classList.remove('jetbrains', 'ibm-plex', 'courier-prime');
+    if (style === 'jetbrains') {
+        mainContent.classList.add('jetbrains');
+    } else if (style === 'ibm-plex') {
+        mainContent.classList.add('ibm-plex');
+    } else if (style === 'courier-prime') {
+        mainContent.classList.add('courier-prime');
+    }
+}
+
+Array.from(changeFontToggle).forEach(item => {
+    item.addEventListener('click', function () {
+        const fontStyle = localStorage.getItem('fontStyle');
+        const modal = this.closest('.modal');
+        const mainContent = modal.querySelector('.main-content');
+        
+        if (fontStyle === 'jetbrains') {
+            localStorage.setItem('fontStyle', 'ibm-plex');
+            applyFontStyle(mainContent, 'ibm-plex');
+        } else if (fontStyle === 'ibm-plex') {
+            localStorage.setItem('fontStyle', 'courier-prime');
+            applyFontStyle(mainContent, 'courier-prime');
+        } else if (fontStyle === 'courier-prime') {
+            localStorage.setItem('fontStyle', 'jetbrains');
+            applyFontStyle(mainContent, 'jetbrains');
         }
     })
 })
