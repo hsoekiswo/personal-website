@@ -373,7 +373,7 @@ a:visited {
 
 /* Hardcoded to show interactivity */
 
-#oklama {
+.selected-journal {
     background-color: aqua;
     border: 1px solid aqua;
     opacity: 50%;

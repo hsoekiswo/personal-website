@@ -158,17 +158,46 @@ listItems.forEach((item) => {
 const menuHeaders = document.getElementsByClassName("menu-header");
 const directories = document.getElementsByClassName("directory");
 
-async function loadContent(modalElement, url, contentSelector) {
+async function getData(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`Data couldn't be loaded \nResponse status: ${response.status}`);
         }
         const data = await response.text();
-        document.querySelector(contentSelector).innerHTML = data;
-        modalElement.classList.remove("hidden");
+
+        return data;
     } catch (error) {
         console.error(error.message);
+    }
+}
+
+function setupJournalClick(contentElement) {
+    const journalTitle = contentElement.querySelectorAll('.journal-title');
+
+    journalTitle.forEach(item => {
+        item.addEventListener('click', function() {
+            let journalID = item.getAttribute('id');
+            let journalURL = `./journal/${journalID}.html`;
+            const modal = document.querySelector(`.modal[data-modal="journal"]`);
+
+            item.classList.add('selected-journal');
+            loadContent(modal, journalURL, '#journal-modal-text');
+        });
+    })
+}
+
+async function loadContent(modalElement, url, contentSelector) {
+    try {
+        const data = await getData(url);
+        const contentElement = document.querySelector(contentSelector);
+        contentElement.innerHTML = data;
+
+        modalElement.classList.remove("hidden");
+
+        setupJournalClick(contentElement, contentSelector);
+    } catch (error) {
+        console.error("Error loading content:", error);
     }
 }
 
@@ -241,6 +270,7 @@ window.addEventListener('load', function () {
     const darkModeState = localStorage.getItem('darkMode');
     Array.from(darkModeToggle).forEach(item => {
         const modal = item.closest('.modal');
+
         const mainContent = modal.querySelector('.main-content');
 
         if (darkModeState === 'enabled') {
