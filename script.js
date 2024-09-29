@@ -1,105 +1,3 @@
-const draggables = document.getElementsByClassName("directory");
-
-Array.from(draggables).forEach(draggable => {
-    let isDragging = false;
-    let hasDragged = false; // Flag to track dragging
-    let startX, startY, initialX, initialY;
-
-    // Function to start dragging
-    function startDrag(x, y) {
-        isDragging = true;
-        hasDragged = false; // Reset drag flag
-        startX = draggable.offsetLeft;
-        startY = draggable.offsetTop;
-        initialX = x;
-        initialY = y;
-    }
-
-    // Function to move the draggable
-    function moveDrag(x, y) {
-        if (!isDragging) return;
-
-        const dx = x - initialX;
-        const dy = y - initialY;
-
-        // If movement is significant, set hasDragged to true
-        if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
-            hasDragged = true;
-        }
-
-        draggable.style.left = `${startX + dx}px`;
-        draggable.style.top = `${startY + dy}px`;
-    }
-
-    // Function to stop dragging
-    function stopDrag() {
-        if (isDragging) {
-            isDragging = false;
-        }
-    }
-
-    // Mouse events
-    draggable.addEventListener('mousedown', function (e) {
-        e.preventDefault(); // Prevent selection or other defaults
-        startDrag(e.clientX, e.clientY);
-
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
-    });
-
-    // Mouse move handler
-    function handleMouseMove(e) {
-        moveDrag(e.clientX, e.clientY);
-    }
-
-    // Mouse up handler
-    function handleMouseUp(e) {
-        stopDrag();
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-    }
-
-    // Touch events
-    draggable.addEventListener('touchstart', function (e) {
-        e.stopImmediatePropagation();
-        const touch = e.touches[0];
-        startDrag(touch.clientX, touch.clientY);
-
-        document.addEventListener('touchmove', handleTouchMove, { passive: false });
-        document.addEventListener('touchend', handleTouchEnd);
-    });
-
-    // Touch move handler
-    function handleTouchMove(e) {
-        const touch = e.touches[0];
-
-        // Check if the user has started dragging
-        if (isDragging) {
-            moveDrag(touch.clientX, touch.clientY);
-            e.preventDefault(); // Prevent scrolling only during dragging
-        }
-    }
-
-    // Touch end handler
-    function handleTouchEnd(e) {
-        stopDrag();
-        document.removeEventListener('touchmove', handleTouchMove);
-        document.removeEventListener('touchend', handleTouchEnd);
-    }
-
-    // Handle click event on the draggable element
-    draggable.addEventListener('click', function (e) {
-        const currentX = draggable.offsetLeft;
-        const currentY = draggable.offsetTop;
-
-        // Prevent modal from opening if the draggable was moved (dragged)
-        if (hasDragged || (currentX !== startX || currentY !== startY)) {
-            e.preventDefault(); // Prevent default action (like opening the modal)
-            e.stopImmediatePropagation(); // Stop the event from propagating further
-        }
-    });
-});
-
 //----------------------//
 
 // Directory position
@@ -156,7 +54,6 @@ listItems.forEach((item) => {
 
 // Window pop up or modal opening
 const menuHeaders = document.getElementsByClassName("menu-header");
-const directories = document.getElementsByClassName("directory");
 
 async function getData(url) {
     try {
@@ -183,6 +80,7 @@ function setupJournalClick(contentElement) {
 
             item.classList.add('selected-journal');
             loadContent(modal, journalURL, '#journal-modal-text');
+            console.log('tracking E');
         });
     })
 }
@@ -214,21 +112,123 @@ Array.from(menuHeaders).forEach(item => {
     })
 })
 
-Array.from(directories).forEach(item => {
-    item.addEventListener('mousedown', function (e) {
-        const modalTarget = item.getAttribute('data-modal-target');
+// Window pop up + dragging ability for directory
+const directories = document.getElementsByClassName("directory");
+
+Array.from(directories).forEach(directory => {
+    let isDragging = false;
+    let hasDragged = false; // Flag to track dragging
+    let startX, startY, initialX, initialY;
+
+    // Function to start dragging
+    function startDrag(x, y) {
+        isDragging = true;
+        hasDragged = false; // Reset drag flag
+        startX = directory.offsetLeft;
+        startY = directory.offsetTop;
+        initialX = x;
+        initialY = y;
+    }
+
+    // Function to move the directory
+    function moveDrag(x, y) {
+        if (!isDragging) return;
+
+        const dx = x - initialX;
+        const dy = y - initialY;
+
+        // If movement is significant, set hasDragged to true
+        if (Math.abs(dx) != 0 && Math.abs(dy) != 0) {
+            hasDragged = true;
+        }
+
+        directory.style.left = `${startX + dx}px`;
+        directory.style.top = `${startY + dy}px`;
+    }
+
+    // Function to stop dragging
+    function stopDrag() {
+        if (isDragging) {
+            isDragging = false;
+        }
+    }
+
+    // Mouse events
+    directory.addEventListener('mousedown', function (e) {
+        e.preventDefault();
+        startDrag(e.clientX, e.clientY);
+        
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+    });
+
+
+    // Mouse move handler
+    function handleMouseMove(e) {
+        e.stopImmediatePropagation();
+        moveDrag(e.clientX, e.clientY);
+    }
+
+    // Mouse up handler
+    function handleMouseUp() {
+        stopDrag();
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+
+        if (!hasDragged) {
+            openModal(directory);
+        }
+    }
+
+    // Touch events
+    directory.addEventListener('touchstart', function (e) {
+        e.stopImmediatePropagation();
+        const touch = e.touches[0];
+        startDrag(touch.clientX, touch.clientY);
+
+        document.addEventListener('touchmove', handleTouchMove, { passive: false });
+        document.addEventListener('touchend', handleTouchEnd);
+    });
+
+    // Touch move handler
+    function handleTouchMove(e) {
+        const touch = e.touches[0];
+
+        // Check if the user has started dragging
+        if (isDragging) {
+            moveDrag(touch.clientX, touch.clientY);
+            e.preventDefault(); // Prevent scrolling only during dragging
+        }
+    }
+
+    // Touch end handler
+    function handleTouchEnd(e) {
+        stopDrag();
+        document.removeEventListener('touchmove', handleTouchMove);
+        document.removeEventListener('touchend', handleTouchEnd);
+
+        // NEW
+        if (!hasDragged) {
+            openModal(directory);
+        }
+    }
+
+    function openModal(directory) {
+        const modalTarget = directory.getAttribute('data-modal-target');
         const modal = document.querySelector(`.modal[data-modal="${modalTarget}"]`);
 
-        if (modalTarget === "portfolio") {
-            loadContent(modal, './portfolio/index.html', '#portfolio-modal-content');
-        } else if (modalTarget=== "journal") {
-            loadContent(modal, './journal/index.html', '#journal-modal-content');
-        } else if (modalTarget=== "bookshelf") {
-            loadContent(modal, './bookshelf/index.html', '#bookshelf-modal-content');
-        } else if (modalTarget=== "music") {
-            loadContent(modal, './music/index.html', '#music-modal-content');
+        if (modalTarget && !hasDragged) {
+            if (modalTarget === "portfolio") {
+                loadContent(modal, './portfolio/index.html', '#portfolio-modal-content');
+            } else if (modalTarget=== "journal") {
+                loadContent(modal, './journal/index.html', '#journal-modal-content');
+            } else if (modalTarget=== "bookshelf") {
+                loadContent(modal, './bookshelf/index.html', '#bookshelf-modal-content');
+            } else if (modalTarget=== "music") {
+                loadContent(modal, './music/index.html', '#music-modal-content');
+            }   
         }
-    })
+    }
 });
 
 // Window closing
