@@ -70,6 +70,12 @@ async function getData(url) {
 }
 
 function setupJournalClick(contentElement) {
+    /*
+    1. membuat list dari nama file
+    2. set up local storage dengan isi kosong
+    3. membuat fungsi untuk memasukan nilai local storage dengan judul
+    4. mengaktifkan warna biru sesuai judul
+    */
     const journalTitle = contentElement.querySelectorAll('.journal-title');
 
     journalTitle.forEach(item => {
@@ -80,7 +86,6 @@ function setupJournalClick(contentElement) {
 
             item.classList.add('selected-journal');
             loadContent(modal, journalURL, '#journal-modal-text');
-            console.log('tracking E');
         });
     })
 }
