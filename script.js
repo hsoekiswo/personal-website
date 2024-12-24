@@ -1,5 +1,3 @@
-//----------------------//
-
 // Directory position
 document.addEventListener("DOMContentLoaded", function() { // window.onload() = execute after 
     const elements = ['portfolio', 'journal', 'bookshelf', 'music'];
@@ -69,6 +67,7 @@ async function getData(url) {
     }
 }
 
+// Interactivity on journal sidebar
 function setupJournalClick(contentElement) {
     /*
     1. membuat list dari nama file
@@ -77,14 +76,23 @@ function setupJournalClick(contentElement) {
     4. mengaktifkan warna biru sesuai judul
     */
     const journalTitle = contentElement.querySelectorAll('.journal-title');
+    let previousItem = [];
 
     journalTitle.forEach(item => {
         item.addEventListener('click', function() {
+            if (previousItem[0] !== undefined) {
+                previousItem[0].classList.remove('selected-journal');
+            }
             let journalID = item.getAttribute('id');
+            localStorage.setItem('journalState', JSON.stringify(journalID))
             let journalURL = `./journal/${journalID}.html`;
             const modal = document.querySelector(`.modal[data-modal="journal"]`);
 
-            item.classList.add('selected-journal');
+            let stateValue = localStorage.getItem('journalState').replace(/"/g, '');
+            let selectedItem = document.getElementById(stateValue);
+
+            selectedItem.classList.add('selected-journal');
+            previousItem[0] = selectedItem;
             loadContent(modal, journalURL, '#journal-modal-text');
         });
     })
