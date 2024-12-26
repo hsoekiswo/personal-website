@@ -69,12 +69,6 @@ async function getData(url) {
 
 // Interactivity on journal sidebar
 function setupJournalClick(contentElement) {
-    /*
-    1. membuat list dari nama file
-    2. set up local storage dengan isi kosong
-    3. membuat fungsi untuk memasukan nilai local storage dengan judul
-    4. mengaktifkan warna biru sesuai judul
-    */
     const journalTitle = contentElement.querySelectorAll('.journal-title');
     let previousItem = [];
 
@@ -84,19 +78,51 @@ function setupJournalClick(contentElement) {
                 previousItem[0].classList.remove('selected-journal');
             }
             let journalID = item.getAttribute('id');
+
             localStorage.setItem('journalState', JSON.stringify(journalID))
             let journalURL = `./journal/${journalID}.html`;
             const modal = document.querySelector(`.modal[data-modal="journal"]`);
 
-            let stateValue = JSON.parse(localStorage.getItem('journalState'));
             let selectedItem = document.getElementById(stateValue);
 
             selectedItem.classList.add('selected-journal');
             previousItem[0] = selectedItem;
             loadContent(modal, journalURL, '#journal-modal-text');
         });
+    });
+};
+
+
+localStorage.setItem('portfolioState', JSON.stringify('address-book'));
+function setupPortfolioClick(contentElement) {
+    const portfolioTitle = contentElement.querySelectorAll('.portfolio-list');
+    let previousItem = [];
+
+    portfolioTitle.forEach(item => {
+        item.addEventListener('click', function() {
+            let portfolioID = item.getAttribute('id');
+            if (previousItem[0] !== undefined) {
+                // let previousElement = document.getElementById(previousItem[0])
+                previousItem[0].classList.remove('selected-portfolio');
+            } else if (previousItem[0] === undefined && JSON.parse(localStorage.getItem('portfolioState')) === 'address-book') {
+                console.log('called!')
+                console.log(document.getElementById(portfolioID))
+                document.getElementById('address-book').classList.remove('selected-portfolio');
+            }
+
+            localStorage.setItem('portfolioState', JSON.stringify(portfolioID))
+            let portfolioURL = `./portfolio/${portfolioID}.html`;
+            const modal = document.querySelector(`.modal[data-modal="portfolio"]`);
+
+            let selectedItem = document.getElementById(portfolioID);
+
+            selectedItem.classList.add('selected-portfolio');
+            previousItem[0] = selectedItem;
+
+            loadContent(modal, portfolioURL, '#portfolio-modal-text');
+        });
     })
-}
+};
 
 async function loadContent(modalElement, url, contentSelector) {
     try {
@@ -107,6 +133,7 @@ async function loadContent(modalElement, url, contentSelector) {
         modalElement.classList.remove("hidden");
 
         setupJournalClick(contentElement, contentSelector);
+        setupPortfolioClick(contentElement, contentSelector);
     } catch (error) {
         console.error("Error loading content:", error);
     }

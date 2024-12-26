@@ -391,7 +391,7 @@ a:visited {
     font-family: "Courier Prime", monospace;
 }
 
-#address-book {
+.selected-portfolio {
     background-color: aqua;
     opacity: 70%;
 }
