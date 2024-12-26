@@ -88,7 +88,7 @@ function setupJournalClick(contentElement) {
             let journalURL = `./journal/${journalID}.html`;
             const modal = document.querySelector(`.modal[data-modal="journal"]`);
 
-            let stateValue = localStorage.getItem('journalState').replace(/"/g, '');
+            let stateValue = JSON.parse(localStorage.getItem('journalState'));
             let selectedItem = document.getElementById(stateValue);
 
             selectedItem.classList.add('selected-journal');
