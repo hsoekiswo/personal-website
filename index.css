@@ -411,7 +411,7 @@ a:visited {
     }
 
     .portfolio-image {
-        flex: 2; margin-left: 2em;
+        flex: 2; margin-left: 2em; margin-top: 10%;
     }
 }
 
