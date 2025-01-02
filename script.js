@@ -95,7 +95,7 @@ function setupJournalClick(contentElement) {
     }
 };
 
-
+// Interactivity on portfolio sidebar
 localStorage.setItem('portfolioState', JSON.stringify('address-book'));
 function setupPortfolioClick(contentElement) {
     const portfolioTitle = contentElement.querySelectorAll('.portfolio-list');
@@ -130,6 +130,27 @@ function setupPortfolioClick(contentElement) {
     }
 };
 
+// Send email
+function setUpEmailClick(contentElement) {
+    emailjs.init(window.env.PUBLIC_KEY);
+
+    const contactElement = contentElement.querySelector('#contact-form');
+
+    contactElement.addEventListener("submit", function(event) {
+        event.preventDefault();
+        emailjs.sendForm(window.env.SERVICE_ID, window.env.TEMPLATE_ID, this)
+            .then(() => {
+                console.log('SUCCESS!');
+                alert('Your message has been sent successfully!');
+
+                contactElement.reset();
+            }, (error) => {
+                console.log('FAILED...', error);
+            });
+    });
+
+}
+
 async function loadContent(modalElement, url, contentSelector) {
     try {
         const data = await getData(url);
@@ -142,6 +163,8 @@ async function loadContent(modalElement, url, contentSelector) {
             setupJournalClick(contentElement);
         } else if (contentSelector.includes('portfolio')) {
             setupPortfolioClick(contentElement);
+        } else if (contentSelector.includes('contact')) {
+            setUpEmailClick(contentElement);
         }
     } catch (error) {
         console.error("Error loading content:", error);
