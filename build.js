@@ -9,5 +9,5 @@ window.env = {
 };
 `;
 
-fs.writeFileSync('./public/env.js', content);
+fs.writeFileSync('./env.js', content);
 console.log('Environment variables injected into env.js');
