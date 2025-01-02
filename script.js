@@ -73,23 +73,26 @@ function setupJournalClick(contentElement) {
     let previousItem = [];
 
     journalTitle.forEach(item => {
-        item.addEventListener('click', function() {
-            if (previousItem[0] !== undefined) {
-                previousItem[0].classList.remove('selected-journal');
-            }
-            let journalID = item.getAttribute('id');
-
-            localStorage.setItem('journalState', JSON.stringify(journalID))
-            let journalURL = `./journal/${journalID}.html`;
-            const modal = document.querySelector(`.modal[data-modal="journal"]`);
-
-            let selectedItem = document.getElementById(stateValue);
-
-            selectedItem.classList.add('selected-journal');
-            previousItem[0] = selectedItem;
-            loadContent(modal, journalURL, '#journal-modal-text');
-        });
+        item.removeEventListener('click', journalClickHandler);
+        item.addEventListener('click', journalClickHandler);
     });
+
+    function journalClickHandler(event) {
+        if (previousItem[0] !== undefined) {
+            previousItem[0].classList.remove('selected-journal');
+        }
+        let journalID = event.currentTarget.getAttribute('id');
+        localStorage.setItem('journalState', JSON.stringify(journalID))
+
+        const modal = document.querySelector(`.modal[data-modal="journal"]`);
+        let journalURL = `./journal/${journalID}.html`;
+
+        let selectedItem = document.getElementById(journalID);
+
+        selectedItem.classList.add('selected-journal');
+        loadContent(modal, journalURL, '#journal-modal-text');
+        previousItem[0] = selectedItem;
+    }
 };
 
 
@@ -99,29 +102,32 @@ function setupPortfolioClick(contentElement) {
     let previousItem = [];
 
     portfolioTitle.forEach(item => {
-        item.addEventListener('click', function() {
-            let portfolioID = item.getAttribute('id');
-            if (previousItem[0] !== undefined) {
-                // let previousElement = document.getElementById(previousItem[0])
-                previousItem[0].classList.remove('selected-portfolio');
-            } else if (previousItem[0] === undefined && JSON.parse(localStorage.getItem('portfolioState')) === 'address-book') {
-                console.log('called!')
-                console.log(document.getElementById(portfolioID))
-                document.getElementById('address-book').classList.remove('selected-portfolio');
-            }
+        item.removeEventListener('click', portfolioClickHandler);
+        item.addEventListener('click', portfolioClickHandler);
+    });
 
-            localStorage.setItem('portfolioState', JSON.stringify(portfolioID))
-            let portfolioURL = `./portfolio/${portfolioID}.html`;
-            const modal = document.querySelector(`.modal[data-modal="portfolio"]`);
+    function portfolioClickHandler(event) {
+        let portfolioID = event.currentTarget.getAttribute('id');
+        if (previousItem[0] !== undefined) {
+            // let previousElement = document.getElementById(previousItem[0])
+            previousItem[0].classList.remove('selected-portfolio');
+        } else if (previousItem[0] === undefined && JSON.parse(localStorage.getItem('portfolioState')) === 'address-book') {
+            console.log('called!')
+            console.log(document.getElementById(portfolioID))
+            document.getElementById('address-book').classList.remove('selected-portfolio');
+        }
+        
+        localStorage.setItem('portfolioState', JSON.stringify(portfolioID));
 
-            let selectedItem = document.getElementById(portfolioID);
+        const modal = document.querySelector(`.modal[data-modal="portfolio"]`);
+        let portfolioURL = `./portfolio/${portfolioID}.html`;
 
-            selectedItem.classList.add('selected-portfolio');
-            previousItem[0] = selectedItem;
+        let selectedItem = document.getElementById(portfolioID);
+        selectedItem.classList.add('selected-portfolio');
+        previousItem[0] = selectedItem;
 
-            loadContent(modal, portfolioURL, '#portfolio-modal-text');
-        });
-    })
+        loadContent(modal, portfolioURL, '#portfolio-modal-text');
+    }
 };
 
 async function loadContent(modalElement, url, contentSelector) {
@@ -132,8 +138,11 @@ async function loadContent(modalElement, url, contentSelector) {
 
         modalElement.classList.remove("hidden");
 
-        setupJournalClick(contentElement, contentSelector);
-        setupPortfolioClick(contentElement, contentSelector);
+        if (contentSelector.includes('journal')) {
+            setupJournalClick(contentElement);
+        } else if (contentSelector.includes('portfolio')) {
+            setupPortfolioClick(contentElement);
+        }
     } catch (error) {
         console.error("Error loading content:", error);
     }
